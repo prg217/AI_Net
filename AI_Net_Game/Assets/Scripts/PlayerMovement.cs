@@ -18,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public float smoothness = 10f;
 
     //점프력 변수
-    public float jumpPower = 1.0f;
+    public float jumpPower = 10.0f;
+    private bool isJump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            toggleCameraRotation = false; // 둘어보기 비활성화
+            toggleCameraRotation = false; // 둘러보기 비활성화
         }
         if(Input.GetKey(KeyCode.LeftShift))
         {
@@ -49,11 +50,14 @@ public class PlayerMovement : MonoBehaviour
         {
             isRun = false;
         }
-        InputMovement();
+
+        //InputMovement();
+        Move();
 
         Jump();
         
     }
+
     private void LateUpdate()
     {
         if(toggleCameraRotation != true)
@@ -63,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
     void InputMovement()
     {
         finalSpeed = (isRun) ? runSpeed : speed;
@@ -77,14 +82,48 @@ public class PlayerMovement : MonoBehaviour
         float percent = ((isRun) ? 1 : 0.5f) * moveDirection.magnitude;
         animator.SetFloat("Blend", percent, 0.1f, Time.deltaTime);
     }
+    */
+
+    void Move()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.back * speed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+        }
+    }
 
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) //GetKey로 하면 누르는 동안 계속 지속됨, GetKeyDown을 해야 한 번만 눌러짐
         {
-            
-            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-            Debug.Log("헬로");
+            if (isJump == false)
+            {
+                rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse); //그리고 바닥에 닿았을 때라는 조건문을 추가 안해두면 무한 점프가 됨
+                Debug.Log("헬로");
+
+                isJump = true;
+            }
+
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Plane") //Plane에 태그 추가
+        {
+            isJump = false; //Plane와 플레이어에 각각 콜라이더 추가
         }
     }
 }
