@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     Camera camera;
     CharacterController characterController;
-    Rigidbody rigid;
 
     public float speed = 5f;
     public float runSpeed = 8f;
@@ -17,9 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public bool toggleCameraRotation;
     public float smoothness = 10f;
 
-    //점프력 변수
-    public float jumpPower = 10.0f;
-    private bool isJump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
         animator = this.GetComponent<Animator>();
         camera = Camera.main;
         characterController = this.GetComponent<CharacterController>();
-        rigid = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -50,12 +45,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isRun = false;
         }
+        InputMovement();
 
-        //InputMovement();
-        Move();
+        //Jump();
 
-        Jump();
-        
     }
 
     private void LateUpdate()
@@ -66,8 +59,6 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
         }
     }
-
-    /*
     void InputMovement()
     {
         finalSpeed = (isRun) ? runSpeed : speed;
@@ -79,12 +70,12 @@ public class PlayerMovement : MonoBehaviour
 
         characterController.Move(moveDirection.normalized * finalSpeed * Time.deltaTime);
 
+        //달리기 애니
         float percent = ((isRun) ? 1 : 0.5f) * moveDirection.magnitude;
         animator.SetFloat("Blend", percent, 0.1f, Time.deltaTime);
     }
-    */
 
-    void Move()
+    /*void Move()
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -102,17 +93,18 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
-    }
+    }*/
 
-    void Jump()
+    /*void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space)) //GetKey로 하면 누르는 동안 계속 지속됨, GetKeyDown을 해야 한 번만 눌러짐
         {
             if (isJump == false)
             {
-                rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse); //그리고 바닥에 닿았을 때라는 조건문을 추가 안해두면 무한 점프가 됨
+                characterController.Move(Vector3.up * jumpPower);
+                //rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse); //그리고 바닥에 닿았을 때라는 조건문을 추가 안해두면 무한 점프가 됨
                 Debug.Log("헬로");
-
+                animator.SetBool("isJump",true);
                 isJump = true;
             }
 
@@ -124,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Plane") //Plane에 태그 추가
         {
             isJump = false; //Plane와 플레이어에 각각 콜라이더 추가
+            animator.SetBool("isJump", false);
         }
-    }
+    }*/
 }

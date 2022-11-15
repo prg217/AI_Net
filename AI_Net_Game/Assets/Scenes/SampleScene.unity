@@ -242,7 +242,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1801014372, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1801014372, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_Center.y
@@ -251,7 +251,7 @@ PrefabInstance:
     - target: {fileID: 1801014374, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: rigid
       value: 
-      objectReference: {fileID: 964359498}
+      objectReference: {fileID: 0}
     - target: {fileID: 1801014374, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: jumpPower
       value: 10
@@ -278,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855052669661678444, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1
+      value: 2.26
       objectReference: {fileID: 0}
     - target: {fileID: 8855052669661678444, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
       propertyPath: m_LocalPosition.z
@@ -317,7 +317,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 1801014372, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
+    - {fileID: 1801014376, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -500,8 +500,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8189980434977739222, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
   m_PrefabInstance: {fileID: 528710283}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &964359497
-CapsuleCollider:
+--- !u!143 &964359497
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -510,15 +510,14 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.7
   m_Radius: 0.5
-  m_Height: 1.5940025
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.71636, z: 0}
---- !u!54 &964359498 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 1801014376, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
-  m_PrefabInstance: {fileID: 528710283}
-  m_PrefabAsset: {fileID: 0}
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.76, z: 0}
 --- !u!1 &2088305642
 GameObject:
   m_ObjectHideFlags: 0
