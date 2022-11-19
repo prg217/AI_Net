@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackBox : MonoBehaviour
 {
+    public string owner = "";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,22 +22,11 @@ public class AttackBox : MonoBehaviour
 
     private void AttackKey()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) //상호작용 키
-        {
-            //누르면 박스 콜라이더 안의 얘들 죽임
 
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
 
-        }
-        if (other.gameObject.tag == "AI")
-        {
-
-        }
     }
 }

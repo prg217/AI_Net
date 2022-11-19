@@ -875,12 +875,12 @@ GameObject:
   - component: {fileID: 3699025465529755550}
   - component: {fileID: 5405421078823439330}
   m_Layer: 0
-  m_Name: AttackBox
-  m_TagString: Untagged
+  m_Name: SearchBox
+  m_TagString: Search
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3699025465529755549
 Transform:
   m_ObjectHideFlags: 0
@@ -921,6 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54884796e31721048a2bd6fdae45a060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: 
 --- !u!1 &3699025467471042071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,6 +1500,7 @@ GameObject:
   - component: {fileID: 3699025465976114169}
   - component: {fileID: 2687879063894307540}
   - component: {fileID: 565667705}
+  - component: {fileID: 6161556105551118563}
   m_Layer: 0
   m_Name: PlayerDagger
   m_TagString: Player
@@ -1560,7 +1562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820a42c0f689bdd4391a5391886500fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isChaser: 0
+  isChaser: 1
   speed: 5
   runSpeed: 8
   finalSpeed: 0
@@ -1568,6 +1570,7 @@ MonoBehaviour:
   toggleCameraRotation: 0
   smoothness: 10
   playerName: {fileID: 0}
+  hp: 100
 --- !u!143 &3699025465976114169
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1625,6 +1628,20 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!136 &6161556105551118563
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827071276216980973}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.46
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.81, z: 0}
 --- !u!1 &5066523828140808802
 GameObject:
   m_ObjectHideFlags: 0

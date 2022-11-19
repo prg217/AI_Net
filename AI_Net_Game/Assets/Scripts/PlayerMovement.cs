@@ -6,7 +6,7 @@ using Photon.Realtime;
 
 public class PlayerMovement : MonoBehaviourPun
 {
-    public bool isChaser = false; //추격자 여부
+    public bool isChaser = true; //추격자 여부
 
     Animator animator;
     CharacterController characterController;
@@ -25,9 +25,14 @@ public class PlayerMovement : MonoBehaviourPun
     private Vector3 currPos;
     private Quaternion currRot;
 
+    public int hp = 100;
+    private bool isDie = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        int hp = 100;
+
         tr = GetComponent<Transform>();
 
         pv = GetComponent<PhotonView>();
@@ -43,7 +48,8 @@ public class PlayerMovement : MonoBehaviourPun
 
         if (isChaser == true) //추격자이면?
         {
-            transform.Find("AttackBox").gameObject.SetActive(true); //AttackBox라는 이름을 가진 자식 오브젝트만 찾아서 활성화
+            transform.Find("SearchBox").gameObject.SetActive(true); //AttackBox라는 이름을 가진 자식 오브젝트만 찾아서 활성화
+            transform.Find("SearchBox").GetComponent<AttackBox>().owner = name;
         }
     }
 
@@ -69,8 +75,6 @@ public class PlayerMovement : MonoBehaviourPun
                 isRun = false;
             }
             InputMovement();
-
-            //Jump();
         }
         else if (!pv.IsMine)
         {
@@ -91,15 +95,7 @@ public class PlayerMovement : MonoBehaviourPun
         }
 
     }
-    /*
-    private void LateUpdate()
-    {
-        if(toggleCameraRotation != true)
-        {
-            Vector3 playerRotate = Vector3.Scale(GetComponent<Camera>().transform.forward, new Vector3(1, 0, 1));
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
-        }
-    }*/
+
     void InputMovement()
     {
         finalSpeed = (isRun) ? runSpeed : speed;
@@ -138,4 +134,35 @@ public class PlayerMovement : MonoBehaviourPun
 
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("HIT!:" + other.gameObject.tag);
+
+        if (Input.GetKeyDown(KeyCode.Space) && isChaser) //상호작용 키
+        {
+            if (other.gameObject.tag == "Search")
+            {
+                if (other.gameObject.GetComponent<AttackBox>().owner == name)
+                {
+                    // 자신의 공격은 반응X
+                    return;
+                }
+
+                if (isDie == true)
+                {
+                    return;
+                }
+
+                hp -= 100;
+
+                if (hp <= 0)
+                {
+                    isDie = true;
+                    Destroy(gameObject);//임시로 일단 삭제해줌 나중에 투명상태가 되어서 이동할 수 있게 하기
+                }
+            }
+        }
+    }
+
 }
