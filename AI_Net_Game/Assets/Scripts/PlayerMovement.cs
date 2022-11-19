@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPun
 {
     Animator animator;
-    Camera camera;
     CharacterController characterController;
+    private Transform tr;
 
     public float speed = 5f;
     public float runSpeed = 8f;
@@ -16,14 +18,26 @@ public class PlayerMovement : MonoBehaviour
     public bool toggleCameraRotation;
     public float smoothness = 10f;
 
+    public TextMesh playerName;
+    private PhotonView pv;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        tr = GetComponent<Transform>();
+
+        pv = GetComponent<PhotonView>();
+        pv.ObservedComponents[0] = this;
+
         animator = this.GetComponent<Animator>();
-        camera = Camera.main;
+        if (pv.IsMine)
+        {
+            GameObject.Find("Camera").GetComponent<CameraMovement>().objectTofollow = tr.Find("FollowCam").gameObject.transform;
+            //Camera.main.GetComponent<CameraMovement>().objectTofollow = tr.Find("FollowCam").gameObject.transform;
+        }
         characterController = this.GetComponent<CharacterController>();
+
+
     }
 
     // Update is called once per frame
@@ -31,11 +45,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.LeftAlt))
         {
-            toggleCameraRotation = true; //µÑ·¯º¸±â È°¼ºÈ­
+            toggleCameraRotation = true; //ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
         }
         else
         {
-            toggleCameraRotation = false; // µÑ·¯º¸±â ºñÈ°¼ºÈ­
+            toggleCameraRotation = false; // ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         }
         if(Input.GetKey(KeyCode.LeftShift))
         {
@@ -55,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(toggleCameraRotation != true)
         {
-            Vector3 playerRotate = Vector3.Scale(camera.transform.forward, new Vector3(1, 0, 1));
+            Vector3 playerRotate = Vector3.Scale(GetComponent<Camera>().transform.forward, new Vector3(1, 0, 1));
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
         }
     }
@@ -70,53 +84,14 @@ public class PlayerMovement : MonoBehaviour
 
         characterController.Move(moveDirection.normalized * finalSpeed * Time.deltaTime);
 
-        //´Þ¸®±â ¾Ö´Ï
+        //ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½
         float percent = ((isRun) ? 1 : 0.5f) * moveDirection.magnitude;
         animator.SetFloat("Blend", percent, 0.1f, Time.deltaTime);
     }
 
-    /*void Move()
+    public void SetPlayerName(string name)
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back * speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
-        }
-    }*/
-
-    /*void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) //GetKey·Î ÇÏ¸é ´©¸£´Â µ¿¾È °è¼Ó Áö¼ÓµÊ, GetKeyDownÀ» ÇØ¾ß ÇÑ ¹ø¸¸ ´­·¯Áü
-        {
-            if (isJump == false)
-            {
-                characterController.Move(Vector3.up * jumpPower);
-                //rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse); //±×¸®°í ¹Ù´Ú¿¡ ´ê¾ÒÀ» ¶§¶ó´Â Á¶°Ç¹®À» Ãß°¡ ¾ÈÇØµÎ¸é ¹«ÇÑ Á¡ÇÁ°¡ µÊ
-                Debug.Log("Çï·Î");
-                animator.SetBool("isJump",true);
-                isJump = true;
-            }
-
-        }
+        this.name = name;
+        GetComponent<PlayerMovement>().playerName.text = this.name;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Plane") //Plane¿¡ ÅÂ±× Ãß°¡
-        {
-            isJump = false; //Plane¿Í ÇÃ·¹ÀÌ¾î¿¡ °¢°¢ ÄÝ¶óÀÌ´õ Ãß°¡
-            animator.SetBool("isJump", false);
-        }
-    }*/
 }
