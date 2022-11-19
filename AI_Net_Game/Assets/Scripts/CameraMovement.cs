@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform objectTofollow;
+    public Transform playerTr;
     public float followSpeed = 10f;
     public float sensitivity = 100f;
     public float clampAngle = 70f;
@@ -43,7 +44,7 @@ public class CameraMovement : MonoBehaviour
         rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
         Quaternion rot = Quaternion.Euler(rotX, rotY, 0);
         transform.rotation = rot;
-
+        playerTr.rotation = rot; //플레이어도 여기서 회전해줌
 
     }
 

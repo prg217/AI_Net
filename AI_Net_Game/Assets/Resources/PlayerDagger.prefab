@@ -873,13 +873,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3699025465529755549}
   - component: {fileID: 3699025465529755550}
+  - component: {fileID: 5405421078823439330}
   m_Layer: 0
   m_Name: AttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3699025465529755549
 Transform:
   m_ObjectHideFlags: 0
@@ -903,11 +904,23 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3699025465529755548}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5405421078823439330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3699025465529755548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54884796e31721048a2bd6fdae45a060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3699025467471042071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1501,7 @@ GameObject:
   - component: {fileID: 565667705}
   m_Layer: 0
   m_Name: PlayerDagger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1547,6 +1560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820a42c0f689bdd4391a5391886500fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isChaser: 0
   speed: 5
   runSpeed: 8
   finalSpeed: 0

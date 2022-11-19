@@ -356,6 +356,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Attack.cs"
 "Assets/Photon/PhotonChat/Demos/Common/EventSystemSpawner.cs"
 "Assets/Photon/PhotonChat/Demos/Common/OnStartDelete.cs"
 "Assets/Photon/PhotonChat/Demos/Common/TextButtonTransition.cs"
@@ -380,12 +381,12 @@
 "Assets/PhotonChatApi/ChatState.cs"
 "Assets/PhotonChatApi/ChatUserStatus.cs"
 "Assets/PhotonChatApi/IChatClientListener.cs"
+"Assets/Scripts/AttackBox.cs"
 "Assets/Scripts/CameraMovement.cs"
 "Assets/Scripts/PhotonScripts/CreateRoom.cs"
 "Assets/Scripts/PhotonScripts/LobbyManager.cs"
 "Assets/Scripts/PhotonScripts/PhotonInit.cs"
 "Assets/Scripts/PlayerMovement.cs"
-"Assets/Scripts/TheChaser.cs"
 -langversion:9.0
 
 /deterministic
