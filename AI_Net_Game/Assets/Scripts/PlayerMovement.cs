@@ -6,7 +6,7 @@ using Photon.Realtime;
 
 public class PlayerMovement : MonoBehaviourPun
 {
-    public bool isChaser = true; //추격자 여부
+    public bool isChaser = false; //추격자 여부
 
     Animator animator;
     CharacterController characterController;
@@ -46,6 +46,13 @@ public class PlayerMovement : MonoBehaviourPun
         }
         characterController = this.GetComponent<CharacterController>();
 
+        if (PhotonNetwork.IsMasterClient) //호스트 일 경우
+        {
+            GameObject.Find("Canvas").transform.Find("StartButton").gameObject.SetActive(true);
+            //게임 스타트 버튼이 보이게 한다.
+        }
+
+        //이건 게임 스타트를 누를 경우 실행하게 해주자
         if (isChaser == true) //추격자이면?
         {
             transform.Find("SearchBox").gameObject.SetActive(true); //AttackBox라는 이름을 가진 자식 오브젝트만 찾아서 활성화

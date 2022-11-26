@@ -120,7 +120,7 @@
 -define:CSHARP_7_3_OR_NEWER
 -r:"Assets/Plugins/netstandard2.0/Photon3Unity3D.dll"
 -r:"Assets/Plugins/WebSocket/websocket-sharp.dll"
--r:"C:/gamework/NetworkGame/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/AOT/Newtonsoft.Json.dll"
+-r:"C:/gamework/AI_Net/AI_Net_Game/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/AOT/Newtonsoft.Json.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Core.dll"

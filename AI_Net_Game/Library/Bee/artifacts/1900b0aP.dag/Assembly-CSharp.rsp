@@ -115,7 +115,7 @@
 -define:CSHARP_7_3_OR_NEWER
 -r:"Assets/Plugins/netstandard2.0/Photon3Unity3D.dll"
 -r:"Assets/Plugins/WebSocket/websocket-sharp.dll"
--r:"C:/gamework/NetworkGame/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/AOT/Newtonsoft.Json.dll"
+-r:"C:/gamework/AI_Net/AI_Net_Game/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/AOT/Newtonsoft.Json.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Core.dll"
@@ -316,7 +316,6 @@
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.TextMeshPro.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.Timeline.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/UnityEngine.UI.ref.dll"
-"Assets/Attack.cs"
 "Assets/Photon/PhotonChat/Demos/Common/EventSystemSpawner.cs"
 "Assets/Photon/PhotonChat/Demos/Common/OnStartDelete.cs"
 "Assets/Photon/PhotonChat/Demos/Common/TextButtonTransition.cs"
@@ -347,6 +346,8 @@
 "Assets/Scripts/PhotonScripts/LobbyManager.cs"
 "Assets/Scripts/PhotonScripts/PhotonInit.cs"
 "Assets/Scripts/PlayerMovement.cs"
+"Assets/Scripts/StartButton.cs"
+"Assets/Scripts/TheChaser.cs"
 -langversion:9.0
 
 /deterministic

@@ -30,9 +30,9 @@ public class CameraMovement : MonoBehaviour
         dirNormalized = realCamera.localPosition.normalized;
         finalDistance = realCamera.localPosition.magnitude;
 
-        //커서 없애기.
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //마우스 오른쪽 클릭할때만 마우스 없애게 수정해야함
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     // Update is called once per frame
