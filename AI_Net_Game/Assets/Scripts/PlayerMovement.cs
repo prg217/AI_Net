@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class PlayerMovement : MonoBehaviourPun
+public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
     public bool isChaser = false; //추격자 여부
 
@@ -27,6 +27,9 @@ public class PlayerMovement : MonoBehaviourPun
 
     public int hp = 100;
     private bool isDie = false;
+
+    private float h = 0f;
+    private float v = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -89,6 +92,7 @@ public class PlayerMovement : MonoBehaviourPun
             {
                 animator.SetFloat("Speed", 1.0f);
                 tr.position = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
+                //position이 반영이 안됨
             }
             else
             {
@@ -104,7 +108,7 @@ public class PlayerMovement : MonoBehaviourPun
     }
 
     void InputMovement()
-    {
+    {/*
         finalSpeed = (isRun) ? runSpeed : speed;
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -116,7 +120,12 @@ public class PlayerMovement : MonoBehaviourPun
 
         //�޸��� �ִ�
         float percent = ((isRun) ? 1 : 0.5f) * moveDirection.magnitude;
-        animator.SetFloat("Blend", percent, 0.1f, Time.deltaTime);
+        animator.SetFloat("Blend", percent, 0.1f, Time.deltaTime);*/
+
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
+
+        transform.position += new Vector3(h, 0, v) * speed * Time.deltaTime;
     }
 
     public void SetPlayerName(string name)
