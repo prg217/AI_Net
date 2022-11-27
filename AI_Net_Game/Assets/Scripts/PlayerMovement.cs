@@ -144,8 +144,6 @@ public class PlayerMovement : MonoBehaviourPun
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("HIT!:" + other.gameObject.tag);
-
         if (Input.GetKeyDown(KeyCode.Space) && isChaser) //상호작용 키
         {
             if (other.gameObject.tag == "Search")

@@ -9,9 +9,12 @@ public class StartButton : MonoBehaviourPun
     public List<GameObject> playerList; //박스 콜라이더에 들어온 플레이어를 등록
     private int chaserCount = 0;
     private int random = 0;
+    private int randomX = 0;
+    private int randomZ = 0;
 
     public void GameStart()
     {
+        Debug.Log("GameStart!");
         //버튼을 누를 경우 호스트 기준으로 플레이어들 역할 배정해주기
         //태그가 Player인 얘들을 찾아서...할까?
 
@@ -52,7 +55,18 @@ public class StartButton : MonoBehaviourPun
                 }
             }
 
+            GameObject.Find("Canvas").transform.Find("StartButton").gameObject.SetActive(false); //스타트 버튼 비활성화
+
+            for (int i = 0; i < playerList.Count; i++)
+            {
+                randomX = Random.Range(-20, 20);
+                randomZ = Random.Range(-20, 20);
+                //랜덤 x, z좌표 넣어주기
+                //지형이 울퉁불퉁할 경우에는 스폰 지점 좌표...설정해서 해주기
+                playerList[i].transform.position = new Vector3(randomX, playerList[i].transform.position.y, randomZ);
+            }
             //이 이후 스타트 버튼을 삭제하고 플레이어들 맵 범위 안에 랜덤 스폰되게 하고
+            
             //AI들도 스폰하고...
         }
     }
