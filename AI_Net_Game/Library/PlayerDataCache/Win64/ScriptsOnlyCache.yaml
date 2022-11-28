@@ -1,7 +1,6 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - AttackBox
     - CameraMovement
     - PhotonInit
     - PlayerMovement
@@ -251,8 +250,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5376}
     - Class: 114
-      Script: {instanceID: 5402}
-    - Class: 114
       Script: {instanceID: 5470}
     - Class: 115
       Script: {instanceID: 0}
@@ -351,8 +348,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5036}
     - Class: 114
       Script: {instanceID: 5342}
-    - Class: 114
-      Script: {instanceID: 5402}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -450,12 +445,6 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.PunBasics
     className: PlayerUI
-  - hash:
-      serializedVersion: 2
-      Hash: af9331d22dc43640c4569bc3203a3aff
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: TheChaser
   - hash:
       serializedVersion: 2
       Hash: b89ca8c8ae7041500fa1df2b061f55c9
@@ -1706,12 +1695,6 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: 342c3361a92ada0c8a4fa9a87c043a45
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: AttackBox
-  - hash:
-      serializedVersion: 2
       Hash: cba6cca6bb3290c4c00d709cf63843db
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -1744,4 +1727,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/LobbyScene.unity
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/user/Documents/g/NetworkGame2.exe
+  playerPath: C:/gamework/NetworkGame2.exe

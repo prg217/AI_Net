@@ -46,7 +46,7 @@ public class StartButton : MonoBehaviourPun
 
                 if (playerList[random].GetComponent<PlayerMovement>().isChaser == false)
                 {
-                    playerList[random].GetComponent<PlayerMovement>().isChaser = true;
+                    playerList[random].GetComponent<PlayerMovement>().SetChaser();
                 }
                 else
                 {

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 42
+  controlID: 99
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -121,14 +121,14 @@ MonoBehaviour:
     y: 561
     width: 1466
     height: 386
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 14}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 14}
   - {fileID: 19}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -411,22 +411,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Resources
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Resources
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\user\Documents\GitHub\AI_Net\AI_Net_Game
+  m_LastProjectPath: C:\gamework\AI_Net\AI_Net_Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c8540000
-    m_LastClickedID: 21704
-    m_ExpandedIDs: 000000008854000000ca9a3b
+    m_SelectedIDs: ca540000
+    m_LastClickedID: 21706
+    m_ExpandedIDs: 000000009054000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -454,7 +454,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000088540000
+    m_ExpandedIDs: 0000000090540000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -582,9 +582,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 7e4bfffffc4cffff4a4dffff5450ffff5c50ffff965affff0c5cffff5a5cffff605fffff645fffff5067ffffc468ffff1269ffff186cffff1c6cfffff072ffff3e73ffff4476ffff4876ffff8283ffffa489fffff289fffff88cfffffc8cffff4094ffffb495ffff0296ffff0899ffff0c99ffff78acffffc6acffffccafffffd0affffff2bcffff40bdffff46c0ffff4ac0ffffd2c9ffff20caffff26cdffff2acdffff34d9ffff84d9ffff82dcffff86dcffff5ae8ffffcee9ffff1ceaffff1cedffff24edffff8aedffff0ef1ffff78f6ffffc6f6ffffc6f9ffffcef9ffffe8faffff
+      m_SelectedIDs: 8ac6ffff
+      m_LastClickedID: -14710
+      m_ExpandedIDs: 06c9ffff62caffffb0caffffaacdffffaecdffff62d0ffff08daffff68dbffffb8dbffffbadeffffbedeffff3ee9ffff8ce9ffff8eecffff92ecffffe2faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

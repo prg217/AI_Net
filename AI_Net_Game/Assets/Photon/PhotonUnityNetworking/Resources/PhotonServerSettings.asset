@@ -43,6 +43,9 @@ MonoBehaviour:
   - ChatInfo
   - ApplyUpdateHealth
   - OnDamage
+  - ChaserRPC
+  - SetPlayerPositionRPC
+  - SetChaserRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

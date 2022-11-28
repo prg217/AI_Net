@@ -58,13 +58,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             GameObject.Find("Canvas").transform.Find("StartButton").gameObject.SetActive(true);
             //게임 스타트 버튼이 보이게 한다.
         }
-
-        //이건 게임 스타트를 누를 경우 실행하게 해주자
-        if (isChaser == true) //추격자이면?
-        {
-            transform.Find("SearchBox").gameObject.SetActive(true); //AttackBox라는 이름을 가진 자식 오브젝트만 찾아서 활성화
-            transform.Find("SearchBox").GetComponent<AttackBox>().owner = name;
-        }
     }
 
     // Update is called once per frame
@@ -161,7 +154,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         {
             if (other.gameObject.tag == "Search")
             {
-                if (other.gameObject.GetComponent<AttackBox>().owner == name)
+                if (other.gameObject == transform.Find("SearchBox").gameObject)
                 {
                     // 자신의 공격은 반응X
                     return;
@@ -183,7 +176,24 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         }
     }
 
+    public void SetChaser()
+    {
+        photonView.RPC("SetChaserRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void SetChaserRPC()
+    {
+        isChaser = true;
+    }
+
     public void SetPlayerPosition()
+    {
+        photonView.RPC("SetPlayerPositionRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void SetPlayerPositionRPC()
     {
         if (pv.IsMine)
         {
