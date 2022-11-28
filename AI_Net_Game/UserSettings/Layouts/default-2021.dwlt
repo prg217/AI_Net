@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 101
+  controlID: 42
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -411,22 +411,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\gamework\AI_Net\AI_Net_Game
+  m_LastProjectPath: C:\Users\user\Documents\GitHub\AI_Net\AI_Net_Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2a520000
-    m_LastClickedID: 21034
-    m_ExpandedIDs: 00000000f051000000ca9a3b
+    m_SelectedIDs: c8540000
+    m_LastClickedID: 21704
+    m_ExpandedIDs: 000000008854000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -454,7 +454,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f0510000
+    m_ExpandedIDs: 0000000088540000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -584,7 +584,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: f24effff404fffff8e50ffffa650ffffe25affff305bffff345effff385effff2866ffff7666ffff7a69ffff7e69ffff8477ffffd277ffffea7affff027bffff928bffffe08bffffe48effffe88effff3c96ffffb097fffffe97ffff069bffff0e9bffffd6bdffff52bfffffa0bfffffb8c2ffffd0c2ffff66d0ffff0ae2ffff5ae2ffff64e5ffff6ce5ffff1ee7ffff08e9ffffbaf3ffff08f4ffff24f7ffff3ef7ffff2cfbffff
+      m_ExpandedIDs: 7e4bfffffc4cffff4a4dffff5450ffff5c50ffff965affff0c5cffff5a5cffff605fffff645fffff5067ffffc468ffff1269ffff186cffff1c6cfffff072ffff3e73ffff4476ffff4876ffff8283ffffa489fffff289fffff88cfffffc8cffff4094ffffb495ffff0296ffff0899ffff0c99ffff78acffffc6acffffccafffffd0affffff2bcffff40bdffff46c0ffff4ac0ffffd2c9ffff20caffff26cdffff2acdffff34d9ffff84d9ffff82dcffff86dcffff5ae8ffffcee9ffff1ceaffff1cedffff24edffff8aedffff0ef1ffff78f6ffffc6f6ffffc6f9ffffcef9ffffe8faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -833,9 +833,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 12.087269, y: 12.8459635, z: 27.584461}
+    m_Target: {x: 2.4828143, y: 3.957614, z: 5.0336967}
     speed: 2
-    m_Value: {x: 12.087269, y: 12.8459635, z: 27.584461}
+    m_Value: {x: 2.4828143, y: 3.957614, z: 5.0336967}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -882,13 +882,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.014642002, y: 0.9830502, z: -0.0905061, w: -0.15884459}
+    m_Target: {x: -0.033928808, y: 0.96606743, z: -0.18510029, w: -0.17698994}
     speed: 2
-    m_Value: {x: -0.014641819, y: 0.98303795, z: -0.09050497, w: -0.15884261}
+    m_Value: {x: -0.033928383, y: 0.96605533, z: -0.18509798, w: -0.17698772}
   m_Size:
-    m_Target: 14.221005
+    m_Target: 2.5885406
     speed: 2
-    m_Value: 14.221005
+    m_Value: 2.5885406
   m_Ortho:
     m_Target: 0
     speed: 2

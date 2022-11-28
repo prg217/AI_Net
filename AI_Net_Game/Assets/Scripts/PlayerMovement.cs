@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
+
+using Random = UnityEngine.Random;
+//유니티 랜덤 시스템 랜덤이 겹쳐서 확실하게 해줌
 
 public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
@@ -125,7 +129,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
-        transform.position += new Vector3(h, 0, v) * speed * Time.deltaTime;
+        transform.position += new Vector3(h, 0, v) * speed * Time.deltaTime; //대충 한거라 제대로 동작X 수정바람
     }
 
     public void SetPlayerName(string name)
@@ -176,6 +180,18 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
                     Destroy(gameObject);//임시로 일단 삭제해줌 나중에 투명상태가 되어서 이동할 수 있게 하기
                 }
             }
+        }
+    }
+
+    public void SetPlayerPosition()
+    {
+        if (pv.IsMine)
+        {
+            float randomX = Random.Range(-20, 20);
+            float randomZ = Random.Range(-20, 20);
+            //랜덤 x, z좌표 넣어주기
+            //지형이 울퉁불퉁할 경우에는 스폰 지점 좌표...설정해서 해주기
+            tr.position = new Vector3(randomX, tr.position.y, randomZ);
         }
     }
 

@@ -9,8 +9,6 @@ public class StartButton : MonoBehaviourPun
     public List<GameObject> playerList; //박스 콜라이더에 들어온 플레이어를 등록
     private int chaserCount = 0;
     private int random = 0;
-    private int randomX = 0;
-    private int randomZ = 0;
 
     public void GameStart()
     {
@@ -23,7 +21,7 @@ public class StartButton : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient) //호스트 일 경우
         {
             isStart = true; //플레이어 등록 그만하고
-
+            
             //몇 명인지 파악 후 몇 명이냐에 따라 추격자 숫자 달라지게 하기
             if (playerList.Count <= 4)
             {
@@ -37,6 +35,9 @@ public class StartButton : MonoBehaviourPun
             {
                 chaserCount = 3;
             }
+
+            //추격자 설정 및 위치 설정에 관련해서 자신이 아닌 다른 사람에게 값 전달이 잘 안되는 것 같음 수정 필요
+            //자신에게는 변수 변경이 적용 되는데, 상대 클라이언트에는 적용이 안됨
 
             //추격자 수 만큼 추격자 뽑기 랜덤 돌려서 랜덤 몇 명에게 되도록...
             for (int i = 0; i < chaserCount; i++)
@@ -56,14 +57,10 @@ public class StartButton : MonoBehaviourPun
             }
 
             GameObject.Find("Canvas").transform.Find("StartButton").gameObject.SetActive(false); //스타트 버튼 비활성화
-
+            
             for (int i = 0; i < playerList.Count; i++)
             {
-                randomX = Random.Range(-20, 20);
-                randomZ = Random.Range(-20, 20);
-                //랜덤 x, z좌표 넣어주기
-                //지형이 울퉁불퉁할 경우에는 스폰 지점 좌표...설정해서 해주기
-                playerList[i].transform.position = new Vector3(randomX, playerList[i].transform.position.y, randomZ);
+                playerList[i].GetComponent<PlayerMovement>().SetPlayerPosition();
             }
             //이 이후 스타트 버튼을 삭제하고 플레이어들 맵 범위 안에 랜덤 스폰되게 하고
             
