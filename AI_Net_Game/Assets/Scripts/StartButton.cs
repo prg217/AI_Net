@@ -10,6 +10,11 @@ public class StartButton : MonoBehaviourPun
     private int chaserCount = 0;
     private int random = 0;
 
+    private int AICount = 15; //AI개수
+    private float randomX = 0;
+    private float randomZ = 0;
+    //public GameObject AI;
+
     public void GameStart()
     {
         Debug.Log("GameStart!");
@@ -64,6 +69,14 @@ public class StartButton : MonoBehaviourPun
             }
             //이 이후 스타트 버튼을 삭제하고 플레이어들 맵 범위 안에 랜덤 스폰되게 하고
             
+            for (int i = 0; i < AICount; i++)
+            {
+                randomX = Random.Range(-20, 20);
+                randomZ = Random.Range(-20, 20);
+                random = Random.Range(0, 181); //로테이션 y값
+
+                GameObject AI = PhotonNetwork.Instantiate("AI", new Vector3(randomX, 0, randomZ), Quaternion.Euler(0, random, 0));
+            }
             //AI들도 스폰하고...
         }
     }
