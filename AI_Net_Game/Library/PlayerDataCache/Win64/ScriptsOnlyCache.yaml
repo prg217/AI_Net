@@ -35,6 +35,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+<<<<<<< HEAD
+    - UnityEditor.Graphs.AnimationStateMachine.AnimatorStateTransitionInspector
+=======
+>>>>>>> main
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
@@ -197,14 +201,73 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1668}
     - Class: 114
+<<<<<<< HEAD
+      Script: {instanceID: 1770}
+    - Class: 114
+      Script: {instanceID: 1916}
+=======
       Script: {instanceID: 1778}
     - Class: 114
       Script: {instanceID: 1924}
     - Class: 114
       Script: {instanceID: 1954}
+>>>>>>> main
     - Class: 114
-      Script: {instanceID: 1960}
+      Script: {instanceID: 1946}
     - Class: 114
+<<<<<<< HEAD
+      Script: {instanceID: 1952}
+    - Class: 114
+      Script: {instanceID: 2020}
+    - Class: 114
+      Script: {instanceID: 2362}
+    - Class: 114
+      Script: {instanceID: 2480}
+    - Class: 114
+      Script: {instanceID: 2536}
+    - Class: 114
+      Script: {instanceID: 2752}
+    - Class: 114
+      Script: {instanceID: 2876}
+    - Class: 114
+      Script: {instanceID: 3078}
+    - Class: 114
+      Script: {instanceID: 3132}
+    - Class: 114
+      Script: {instanceID: 3312}
+    - Class: 114
+      Script: {instanceID: 3320}
+    - Class: 114
+      Script: {instanceID: 3328}
+    - Class: 114
+      Script: {instanceID: 3426}
+    - Class: 114
+      Script: {instanceID: 3846}
+    - Class: 114
+      Script: {instanceID: 3926}
+    - Class: 114
+      Script: {instanceID: 4274}
+    - Class: 114
+      Script: {instanceID: 4278}
+    - Class: 114
+      Script: {instanceID: 4466}
+    - Class: 114
+      Script: {instanceID: 4510}
+    - Class: 114
+      Script: {instanceID: 4618}
+    - Class: 114
+      Script: {instanceID: 4934}
+    - Class: 114
+      Script: {instanceID: 4936}
+    - Class: 114
+      Script: {instanceID: 5022}
+    - Class: 114
+      Script: {instanceID: 5088}
+    - Class: 114
+      Script: {instanceID: 5362}
+    - Class: 114
+      Script: {instanceID: 5454}
+=======
       Script: {instanceID: 2028}
     - Class: 114
       Script: {instanceID: 2370}
@@ -256,6 +319,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5462}
     - Class: 114
       Script: {instanceID: 21714}
+>>>>>>> main
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -328,6 +392,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1666}
     - Class: 114
+<<<<<<< HEAD
+      Script: {instanceID: 2020}
+    - Class: 114
+      Script: {instanceID: 2752}
+    - Class: 114
+      Script: {instanceID: 2876}
+    - Class: 114
+      Script: {instanceID: 2926}
+    - Class: 114
+      Script: {instanceID: 3078}
+    - Class: 114
+      Script: {instanceID: 3312}
+    - Class: 114
+      Script: {instanceID: 3320}
+    - Class: 114
+      Script: {instanceID: 3426}
+    - Class: 114
+      Script: {instanceID: 3846}
+    - Class: 114
+      Script: {instanceID: 4776}
+    - Class: 114
+      Script: {instanceID: 4934}
+    - Class: 114
+      Script: {instanceID: 5022}
+    - Class: 114
+      Script: {instanceID: 5328}
+=======
       Script: {instanceID: 2028}
     - Class: 114
       Script: {instanceID: 2760}
@@ -353,6 +444,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5030}
     - Class: 114
       Script: {instanceID: 5336}
+>>>>>>> main
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1118,7 +1210,7 @@ ScriptsOnlyBuild:
     className: BoolInputField
   - hash:
       serializedVersion: 2
-      Hash: 38cb0a05d00817bc5d149f5b8ee44fe0
+      Hash: 2ebe1ccbda1a1271cd7f96f8b0ce07e6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMovement
@@ -1738,4 +1830,8 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/LobbyScene.unity
   - Assets/Scenes/SampleScene.unity
+<<<<<<< HEAD
+  playerPath: "D:/\uB2E4\uC6B4\uB85C\uB4DC/NetworkGame2.exe"
+=======
   playerPath: C:/Users/user/Documents/g/NetworkGame2.exe
+>>>>>>> main

@@ -18,8 +18,9 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     public float speed = 5f;
     public float runSpeed = 8f;
-    public float finalSpeed;
+    public float finalSpeed = 0f;
     public bool isRun;
+    public bool isWalk;
 
     public bool toggleCameraRotation;
     public float smoothness = 10f;
@@ -76,10 +77,14 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 isRun = true;
+                animator.SetBool("isRun", true);
+                finalSpeed = 8f;
             }
             else
             {
                 isRun = false;
+                animator.SetBool("isRun", false);
+                finalSpeed = 5f;
             }
             InputMovement();
         }
@@ -121,8 +126,19 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-
-        transform.position += new Vector3(h, 0, v) * speed * Time.deltaTime; //대충 한거라 제대로 동작X 수정바람
+        Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
+        {
+            tr.Translate(moveDir.normalized * Time.deltaTime * speed);
+            animator.SetBool("isWalk", true);
+        }
+        else
+        {
+            animator.SetBool("isWalk", false);
+        }
+        
+        tr.Rotate(Vector3.up * Time.deltaTime * speed * Input.GetAxis("Mouse X"));
+        //transform.position += new Vector3(h, 0, v) * speed * Time.deltaTime; //대충 한거라 제대로 동작X 수정바람
     }
 
     public void SetPlayerName(string name)
@@ -152,6 +168,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     {
         if (Input.GetKeyDown(KeyCode.Space) && isChaser) //상호작용 키
         {
+            animator.SetTrigger("Attack");
             if (other.gameObject.tag == "Search")
             {
                 if (other.gameObject == transform.Find("SearchBox").gameObject)
