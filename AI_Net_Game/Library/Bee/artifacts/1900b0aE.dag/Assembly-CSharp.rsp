@@ -378,6 +378,7 @@
 "Assets/PhotonChatApi/ChatState.cs"
 "Assets/PhotonChatApi/ChatUserStatus.cs"
 "Assets/PhotonChatApi/IChatClientListener.cs"
+"Assets/Scripts/AI.cs"
 "Assets/Scripts/CameraMovement.cs"
 "Assets/Scripts/PhotonScripts/CreateRoom.cs"
 "Assets/Scripts/PhotonScripts/LobbyManager.cs"
