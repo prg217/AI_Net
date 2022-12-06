@@ -46,6 +46,8 @@ MonoBehaviour:
   - ChaserRPC
   - SetPlayerPositionRPC
   - SetChaserRPC
+  - DamageRPC
+  - AttackRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

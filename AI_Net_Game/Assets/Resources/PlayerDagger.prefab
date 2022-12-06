@@ -873,13 +873,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3699025465529755549}
   - component: {fileID: 3699025465529755550}
+  - component: {fileID: 5229021746143025104}
   m_Layer: 0
-  m_Name: SearchBox
-  m_TagString: Search
+  m_Name: AttackBox
+  m_TagString: AttackBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3699025465529755549
 Transform:
   m_ObjectHideFlags: 0
@@ -906,8 +907,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.4548566}
+  m_Center: {x: 0, y: 0, z: 0.22742832}
+--- !u!114 &5229021746143025104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3699025465529755548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c490f0ba232ba5f40bc9f591bd01fbae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4827071276216980973}
 --- !u!1 &3699025467471042071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,11 +1497,11 @@ GameObject:
   - component: {fileID: 5311682866459430743}
   - component: {fileID: 5637479865021757965}
   - component: {fileID: 3699025467257489501}
-  - component: {fileID: 3699025465976114169}
   - component: {fileID: 2687879063894307540}
   - component: {fileID: 565667705}
   - component: {fileID: 6161556105551118563}
   - component: {fileID: 8003199967322075494}
+  - component: {fileID: 3963742150525860420}
   m_Layer: 0
   m_Name: PlayerDagger
   m_TagString: Player
@@ -1558,25 +1572,8 @@ MonoBehaviour:
   toggleCameraRotation: 0
   smoothness: 10
   playerName: {fileID: 0}
+  pv: {fileID: 0}
   hp: 100
---- !u!143 &3699025465976114169
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4827071276216980973}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 1.7
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.76, z: 0}
 --- !u!114 &2687879063894307540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1626,8 +1623,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.46
+  m_Radius: 0.71
+  m_Height: 1.65
   m_Direction: 1
   m_Center: {x: 0, y: 0.81, z: 0}
 --- !u!54 &8003199967322075494
@@ -1644,8 +1641,38 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 32
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &3963742150525860420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827071276216980973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 2
+    Name: isJump
+  - Type: 9
+    SynchronizeType: 2
+    Name: Attack
+  - Type: 4
+    SynchronizeType: 2
+    Name: isRun
+  - Type: 4
+    SynchronizeType: 2
+    Name: isWalk
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &5066523828140808802
 GameObject:
   m_ObjectHideFlags: 0
