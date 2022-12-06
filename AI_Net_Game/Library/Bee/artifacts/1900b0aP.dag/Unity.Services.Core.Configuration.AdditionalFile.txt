@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-D:\AI_Net\AI_Net_Game
-=======
-C:\Users\user\Documents\GitHub\AI_Net\AI_Net_Game
->>>>>>> main
+C:\gamework\AI_Net\AI_Net_Game

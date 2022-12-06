@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public bool isChaser = false; //추격자 여부
 
     Animator animator;
-    CharacterController characterController;
+    //CharacterController characterController;
     private Transform tr;
 
     public float speed = 5f;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public float smoothness = 10f;
 
     public TextMesh playerName;
-    private PhotonView pv;
+    public PhotonView pv;
     private Vector3 currPos;
     private Quaternion currRot;
 
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             GameObject.Find("Camera").GetComponent<CameraMovement>().objectTofollow = tr.Find("FollowCam").gameObject.transform;
             GameObject.Find("Camera").GetComponent<CameraMovement>().playerTr = gameObject.transform;
         }
-        characterController = this.GetComponent<CharacterController>();
+        //characterController = this.GetComponent<CharacterController>();
 
         if (PhotonNetwork.IsMasterClient) //호스트 일 경우
         {
@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
         Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
         {
             tr.Translate(moveDir.normalized * Time.deltaTime * speed);
             animator.SetBool("isWalk", true);
@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         {
             animator.SetBool("isWalk", false);
         }
-        
+
         tr.Rotate(Vector3.up * Time.deltaTime * speed * Input.GetAxis("Mouse X"));
         //transform.position += new Vector3(h, 0, v) * speed * Time.deltaTime; //대충 한거라 제대로 동작X 수정바람
     }
@@ -145,6 +145,8 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     {
         this.name = name;
         GetComponent<PlayerMovement>().playerName.text = this.name;
+
+        //box.name = name;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -164,33 +166,29 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    public void Damage()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isChaser) //상호작용 키
+        Debug.Log("Damage");
+        photonView.RPC("DamageRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void DamageRPC()
+    {
+        Debug.Log("DamageRPC()");
+
+        hp -= 100;
+
+        if (hp <= 0)
         {
-            animator.SetTrigger("Attack");
-            if (other.gameObject.tag == "Search")
-            {
-                if (other.gameObject == transform.Find("SearchBox").gameObject)
-                {
-                    // 자신의 공격은 반응X
-                    return;
-                }
-
-                if (isDie == true)
-                {
-                    return;
-                }
-
-                hp -= 100;
-
-                if (hp <= 0)
-                {
-                    isDie = true;
-                    Destroy(gameObject);//임시로 일단 삭제해줌 나중에 투명상태가 되어서 이동할 수 있게 하기
-                }
-            }
+            isDie = true; //죽는 것도 펀알피시로?
+            Destroy(gameObject);//임시로 일단 삭제해줌 나중에 투명상태가 되어서 이동할 수 있게 하기
         }
+    }
+
+    public void AttackAni()
+    {
+        animator.SetTrigger("Attack");
     }
 
     public void SetChaser()
@@ -202,6 +200,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public void SetChaserRPC()
     {
         isChaser = true;
+        transform.Find("AttackBox").gameObject.SetActive(true); //추격자면 공격 박스 켜줌
     }
 
     public void SetPlayerPosition()
