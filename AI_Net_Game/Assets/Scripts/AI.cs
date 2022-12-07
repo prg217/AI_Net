@@ -4,6 +4,27 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
+    private int randomState = 0;
+    private int randomMove = 0;
+    private float speed = 5f;
+
+    enum State
+    {
+        Waiting,
+        Move,
+        Rotation,
+    }
+
+    enum MoveEnum
+    {
+        Front,
+        Right,
+        Left,
+    }
+
+    private State state;
+    private MoveEnum moveEnum;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +34,89 @@ public class AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //랜덤으로 자신의 상태를 결정한다.
+        //대기, 이동, 회전
+        //이동은 로컬함수로 앞, 옆 둘 중 하나
+        //회전은 부드럽게 회전(Y축)
+        StartCoroutine(AIState());
+
+        switch (state)
+        {
+            case State.Move:
+                AIMove();
+                break;
+
+            case State.Rotation:
+                break;
+
+            case State.Waiting:
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    IEnumerator AIState()
+    {
+        randomState = Random.Range(0, 3);
+
+        switch (randomState)
+        {
+            case 0:
+                state = State.Move;
+                randomMove = Random.Range(0, 3);
+
+                switch (randomMove)
+                {
+                    case 0:
+                        moveEnum = MoveEnum.Right;
+                        break;
+
+                    case 1:
+                        moveEnum = MoveEnum.Left;
+                        break;
+
+                    case 2:
+                        moveEnum = MoveEnum.Front;
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+
+            case 1:
+                state = State.Rotation;
+                break;
+
+            case 2:
+                state = State.Waiting;
+                break;
+
+            default:
+                break;
+        }
+
+        yield return new WaitForSeconds(3.0f);
+    }
+
+    private void AIMove()
+    {
+        switch (moveEnum)
+        {
+            case MoveEnum.Front:
+                transform.Translate(Vector3.forward * Time.deltaTime * speed);
+                break;
+
+            case MoveEnum.Left:
+                transform.Translate(Vector3.left * Time.deltaTime * speed);
+                break;
+
+            case MoveEnum.Right:
+                transform.Translate(Vector3.right * Time.deltaTime * speed);
+                break;
+        }
     }
 }
