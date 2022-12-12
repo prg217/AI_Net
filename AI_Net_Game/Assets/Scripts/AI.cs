@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
+    private Animator animator;
+
     private int randomState = 0;
     private int randomMove = 0;
+    private int randomRL = 0;
     private float speed = 5f;
+    private float turnSpeed = 10f;
 
     enum State
     {
@@ -28,7 +32,9 @@ public class AI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = this.GetComponent<Animator>();
+
+        StartCoroutine(AIState());
     }
 
     // Update is called once per frame
@@ -38,7 +44,6 @@ public class AI : MonoBehaviour
         //대기, 이동, 회전
         //이동은 로컬함수로 앞, 옆 둘 중 하나
         //회전은 부드럽게 회전(Y축)
-        StartCoroutine(AIState());
 
         switch (state)
         {
@@ -47,6 +52,8 @@ public class AI : MonoBehaviour
                 break;
 
             case State.Rotation:
+                this.transform.Rotate(Vector3.up * randomRL * turnSpeed * Time.deltaTime);
+                Debug.Log("회전");
                 break;
 
             case State.Waiting:
@@ -60,46 +67,51 @@ public class AI : MonoBehaviour
 
     IEnumerator AIState()
     {
-        randomState = Random.Range(0, 3);
-
-        switch (randomState)
+        while (true)
         {
-            case 0:
-                state = State.Move;
-                randomMove = Random.Range(0, 3);
+            randomState = Random.Range(0, 3);
 
-                switch (randomMove)
-                {
-                    case 0:
-                        moveEnum = MoveEnum.Right;
-                        break;
+            switch (randomState)
+            {
+                case 0:
+                    state = State.Move;
+                    randomMove = Random.Range(0, 3);
 
-                    case 1:
-                        moveEnum = MoveEnum.Left;
-                        break;
+                    switch (randomMove)
+                    {
+                        case 0:
+                            moveEnum = MoveEnum.Right;
+                            break;
 
-                    case 2:
-                        moveEnum = MoveEnum.Front;
-                        break;
+                        case 1:
+                            moveEnum = MoveEnum.Left;
+                            break;
 
-                    default:
-                        break;
-                }
-                break;
+                        case 2:
+                            moveEnum = MoveEnum.Front;
+                            break;
 
-            case 1:
-                state = State.Rotation;
-                break;
+                        default:
+                            break;
+                    }
+                    break;
 
-            case 2:
-                state = State.Waiting;
-                break;
+                case 1:
+                    randomRL = Random.Range(-10, 11);
+                    state = State.Rotation;
+                    break;
 
-            default:
-                break;
+                case 2:
+                    state = State.Waiting;
+                    break;
+
+                default:
+                    break;
+            }
+
+            yield return new WaitForSeconds(3.0f); //3초마다 판단하게
         }
 
-        yield return new WaitForSeconds(3.0f);
     }
 
     private void AIMove()
