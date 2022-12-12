@@ -66,6 +66,7 @@ public class StartButton : MonoBehaviourPun
             for (int i = 0; i < playerList.Count; i++)
             {
                 playerList[i].GetComponent<PlayerMovement>().SetPlayerPosition();
+                playerList[i].GetComponent<PlayerMovement>().UIOpen();
             }
             //이 이후 스타트 버튼을 삭제하고 플레이어들 맵 범위 안에 랜덤 스폰되게 하고
             

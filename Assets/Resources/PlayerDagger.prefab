@@ -1565,9 +1565,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isChaser: 0
   speed: 5
-  runSpeed: 8
-  finalSpeed: 0
-  isRun: 0
   isWalk: 0
   toggleCameraRotation: 0
   smoothness: 10

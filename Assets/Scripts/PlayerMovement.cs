@@ -17,9 +17,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private Transform tr;
 
     public float speed = 5f;
-    public float runSpeed = 8f;
-    public float finalSpeed = 0f;
-    public bool isRun;
     public bool isWalk;
 
     public bool toggleCameraRotation;
@@ -34,6 +31,8 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     private float h = 0f;
     private float v = 0f;
+
+    public int missionCount = 7;
 
     // Start is called before the first frame update
     void Start()
@@ -75,15 +74,13 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             }
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                isRun = true;
+                speed = 8f;
                 animator.SetBool("isRun", true);
-                finalSpeed = 8f;
             }
             else
             {
-                isRun = false;
+                speed = 5f;
                 animator.SetBool("isRun", false);
-                finalSpeed = 5f;
             }
             InputMovement();
         }
@@ -109,20 +106,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     }
 
     void InputMovement()
-    {/*
-        finalSpeed = (isRun) ? runSpeed : speed;
-
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
-
-        Vector3 moveDirection = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
-
-        characterController.Move(moveDirection.normalized * finalSpeed * Time.deltaTime);
-
-        //�޸��� �ִ�
-        float percent = ((isRun) ? 1 : 0.5f) * moveDirection.magnitude;
-        animator.SetFloat("Blend", percent, 0.1f, Time.deltaTime);*/
-
+    {
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
         Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
@@ -241,4 +225,37 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         Destroy(gameObject);//임시로 일단 삭제해줌 나중에 투명상태가 되어서 이동할 수 있게 하기
     }
 
+    public void UIOpen()
+    {
+        if (isChaser == true)
+        {
+            GameObject.Find("Canvas").transform.Find("ChaserText").gameObject.SetActive(true);
+        }
+        else
+        {
+            GameObject.Find("Canvas").transform.Find("FugitiveText").gameObject.SetActive(true);
+            //그리고 랜덤하게 플레이어에게 미션이 부여되게 함
+            //미션은 7개 미션 카운트만 RPC로 하고 모든 플레이어가 미션을 완료하면 탈출구 열림
+            //도망자가 한 명이라도 나가면 도망자 승
+
+            //미션은 미션 랜덤하게 부여해주고 UI랜덤...해당되는거 틀어주기
+            //달리기 상태 누적 30초 동안 하기 라던가
+            //점프 10번 하기 라던가
+            //지정된 위치 가기라던가(가고 나서 다른 곳으로 또 가고
+
+            //미션 완료할때마다 파티클로 폭죽 터트리기
+        }
+    }
+
+    //아래로 미션들
+    public void GetMission()
+    {
+        //랜덤 번호에 따라 스위치로 미션 지정해줌
+        //미션
+    }
+
+    public void RunMission()
+    {
+
+    }
 }
