@@ -53,7 +53,6 @@ public class AI : MonoBehaviour
 
             case State.Rotation:
                 this.transform.Rotate(Vector3.up * randomRL * turnSpeed * Time.deltaTime);
-                Debug.Log("È¸Àü");
                 break;
 
             case State.Waiting:

@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private Quaternion currRot;
 
     public int hp = 100;
-    private bool isDie = false;
 
     private float h = 0f;
     private float v = 0f;
@@ -181,8 +180,23 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
         if (hp <= 0)
         {
-            isDie = true; //죽는 것도 펀알피시로?
-            Destroy(gameObject);//임시로 일단 삭제해줌 나중에 투명상태가 되어서 이동할 수 있게 하기
+            photonView.RPC("DeadRPC", RpcTarget.All);
+        }
+    }
+
+    public void AIDamage()
+    {
+        photonView.RPC("AIDamageRPC", RpcTarget.All);
+    }
+    
+    [PunRPC]
+    public void AIDamageRPC()
+    {
+        hp -= 10;
+
+        if (hp <= 0)
+        {
+            photonView.RPC("DeadRPC", RpcTarget.All);
         }
     }
 
@@ -219,6 +233,12 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             //지형이 울퉁불퉁할 경우에는 스폰 지점 좌표...설정해서 해주기
             tr.position = new Vector3(randomX, tr.position.y, randomZ);
         }
+    }
+
+    [PunRPC]
+    public void DeadRPC()
+    {
+        Destroy(gameObject);//임시로 일단 삭제해줌 나중에 투명상태가 되어서 이동할 수 있게 하기
     }
 
 }
