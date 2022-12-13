@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private float h = 0f;
     private float v = 0f;
 
-    public int missionCount = 7;
+    public int missionClearCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -227,27 +227,39 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     public void UIOpen()
     {
-        if (isChaser == true)
-        {
-            GameObject.Find("Canvas").transform.Find("ChaserText").gameObject.SetActive(true);
-        }
-        else
-        {
-            GameObject.Find("Canvas").transform.Find("FugitiveText").gameObject.SetActive(true);
-            //그리고 랜덤하게 플레이어에게 미션이 부여되게 함
-            //미션은 7개 미션 카운트만 RPC로 하고 모든 플레이어가 미션을 완료하면 탈출구 열림
-            //도망자가 한 명이라도 나가면 도망자 승
+        photonView.RPC("UIOpenRPC", RpcTarget.All);
+    }
 
-            //미션은 미션 랜덤하게 부여해주고 UI랜덤...해당되는거 틀어주기
-            //달리기 상태 누적 30초 동안 하기 라던가
-            //점프 10번 하기 라던가
-            //지정된 위치 가기라던가(가고 나서 다른 곳으로 또 가고
+    [PunRPC]
+    public void UIOpenRPC()
+    {
+        if (pv.IsMine)
+        {
+            if (isChaser == true)
+            {
+                GameObject.Find("Canvas").transform.Find("ChaserText").gameObject.SetActive(true);
+            }
+            else if (isChaser == false)
+            {
+                Debug.Log("도망자");
+                GameObject.Find("Canvas").transform.Find("FugitiveText").gameObject.SetActive(true);
+                //그리고 랜덤하게 플레이어에게 미션이 부여되게 함
+                //미션은 7개 미션 카운트만 RPC로 하고 살아있는 모든 플레이어가 미션을 완료하면 탈출구 열림
+                //도망자가 한 명이라도 나가면 도망자 승
 
-            //미션 완료할때마다 파티클로 폭죽 터트리기
+                //미션은 미션 랜덤하게 부여해주고 UI랜덤...해당되는거 틀어주기
+                //달리기 상태 누적 30초 동안 하기 라던가
+                //점프 10번 하기 라던가
+                //지정된 위치 가기라던가(가고 나서 다른 곳으로 또 가고
+
+                //미션 완료할때마다 파티클로 폭죽 터트리기
+                gameObject.GetComponent<Mission>().GetMission();
+            }
         }
     }
 
     //아래로 미션들
+    /*
     public void GetMission()
     {
         //랜덤 번호에 따라 스위치로 미션 지정해줌
@@ -257,5 +269,5 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public void RunMission()
     {
 
-    }
+    }*/
 }
