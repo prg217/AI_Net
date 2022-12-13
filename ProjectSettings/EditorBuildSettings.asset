@@ -54,4 +54,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/FugitiveWin.unity
+    guid: 5495c539e1e18304cbfb45dbf0675a40
+  - enabled: 1
+    path: Assets/Scenes/ChaserWin.unity
+    guid: 44e85e0f21b533841be69907b0d0aed8
   m_configObjects: {}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviourPun
 {
@@ -13,7 +14,12 @@ public class StartButton : MonoBehaviourPun
     private int AICount = 15; //AI개수
     private float randomX = 0;
     private float randomZ = 0;
-    //public GameObject AI;
+
+    public GameObject door1;
+    public GameObject door2;
+    public GameObject door3;
+
+    public int fugitive = 0;
 
     public void GameStart()
     {
@@ -67,6 +73,7 @@ public class StartButton : MonoBehaviourPun
             {
                 playerList[i].GetComponent<PlayerMovement>().SetPlayerPosition();
                 playerList[i].GetComponent<PlayerMovement>().UIOpen();
+                playerList[i].GetComponent<PlayerMovement>().StartSet();
             }
             //이 이후 스타트 버튼을 삭제하고 플레이어들 맵 범위 안에 랜덤 스폰되게 하고
             
@@ -79,6 +86,38 @@ public class StartButton : MonoBehaviourPun
                 GameObject AI = PhotonNetwork.Instantiate("AI", new Vector3(randomX, 0, randomZ), Quaternion.Euler(0, random, 0));
             }
             //AI들도 스폰하고...
+            
+        }
+    }
+
+    public void SetFugitive()
+    {
+        fugitive = playerList.Count - chaserCount;
+    }
+
+
+    public void FugitiveWin()
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            playerList[i].GetComponent<PlayerMovement>().FugitiveWin();
+        }          
+    }
+
+    public void ChaserClear()
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            playerList[i].GetComponent<PlayerMovement>().ChaserWin(); //근데 플레이어가 이미 죽어서 삭제되어서 발동 안 할 가능성이
+        }
+    }
+
+    public void EscapeText()
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            playerList[i].GetComponent<PlayerMovement>().EscapeText();
+            //playerList[i].GetComponent<PlayerMovement>().Escape();
         }
     }
 

@@ -7,6 +7,8 @@ TagManager:
   - AI
   - AttackBox
   - Search
+  - Target
+  - Floor
   layers:
   - Default
   - TransparentFX

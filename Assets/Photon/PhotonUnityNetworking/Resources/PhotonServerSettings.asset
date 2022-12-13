@@ -51,6 +51,16 @@ MonoBehaviour:
   - AIDamageRPC
   - DeadRPC
   - UIOpenRPC
+  - FugitiveClear_PRPC
+  - FugitiveWinRPC
+  - EscapeRPC
+  - MissionCountUpRPC
+  - EscapeTextRPC
+  - FugitiveCountRPC
+  - Start2
+  - StartRPC
+  - StartSetRPC
+  - ChaserWinRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using UnityEngine.SceneManagement;
 
 using Random = UnityEngine.Random;
 //유니티 랜덤 시스템 랜덤이 겹쳐서 확실하게 해줌
@@ -15,9 +16,12 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     Animator animator;
     //CharacterController characterController;
     private Transform tr;
+    private Rigidbody rigid;
 
     public float speed = 5f;
     public bool isWalk;
+    private float jumpPower = 5f;
+    private bool isJump = false;
 
     public bool toggleCameraRotation;
     public float smoothness = 10f;
@@ -34,12 +38,19 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     public int missionClearCount = 0;
 
+    private bool isClear = false;
+
+    public GameObject doorP1;
+    public GameObject doorP2;
+    public GameObject doorP3;
+
     // Start is called before the first frame update
     void Start()
     {
         int hp = 100;
 
         tr = GetComponent<Transform>();
+        rigid = GetComponent<Rigidbody>();
 
         pv = GetComponent<PhotonView>();
         pv.ObservedComponents[0] = this;
@@ -83,6 +94,14 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
                 animator.SetBool("isRun", false);
             }
             InputMovement();
+
+            if (missionClearCount >= 5 && isClear == false)
+            {
+                isClear = true;
+
+                GameObject.Find("StartScript").gameObject.GetComponent<StartButton>().EscapeText();
+                Escape();
+            }
         }
         else if (!pv.IsMine)
         {
@@ -122,6 +141,17 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
         tr.Rotate(Vector3.up * Time.deltaTime * speed * Input.GetAxis("Mouse X"));
         //transform.position += new Vector3(h, 0, v) * speed * Time.deltaTime; //대충 한거라 제대로 동작X 수정바람
+
+        if (Input.GetKeyDown(KeyCode.Space) && isJump == false)
+        {
+            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            isJump = true;
+
+            if (gameObject.GetComponent<Mission>().jumpMission == true)
+            {
+                gameObject.GetComponent<Mission>().jumpCount++;
+            }
+        }
     }
 
     public void SetPlayerName(string name)
@@ -164,7 +194,12 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
         if (hp <= 0)
         {
+            if (isChaser == false)
+            {
+                FugitiveCount();
+            }
             photonView.RPC("DeadRPC", RpcTarget.All);
+
         }
     }
 
@@ -222,7 +257,8 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     [PunRPC]
     public void DeadRPC()
     {
-        Destroy(gameObject);//임시로 일단 삭제해줌 나중에 투명상태가 되어서 이동할 수 있게 하기
+        transform.Find("Body").gameObject.SetActive(false);
+        gameObject.GetComponent<Mission>().enabled = false;
     }
 
     public void UIOpen()
@@ -258,16 +294,114 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         }
     }
 
-    //아래로 미션들
-    /*
-    public void GetMission()
+    public void OnTriggerEnter(Collider other)
     {
-        //랜덤 번호에 따라 스위치로 미션 지정해줌
-        //미션
+        if (other.gameObject.tag == "Target")
+        {
+            gameObject.GetComponent<Mission>().tagetCount++;
+            other.gameObject.SetActive(false);
+
+            if (gameObject.GetComponent<Mission>().tagetCount >= 4)
+            {
+                gameObject.GetComponent<Mission>().TargetMissionClear();
+            }
+        }
     }
 
-    public void RunMission()
+    public void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Floor")
+        {
+            isJump = false;
+        }
+    }
 
-    }*/
+    public void MissionCountUp()
+    {
+        photonView.RPC("MissionCountUpRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void MissionCountUpRPC()
+    {
+        missionClearCount++;
+    }
+
+    public void Escape()
+    {
+        photonView.RPC("EscapeRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void EscapeRPC()
+    {
+        doorP1 = GameObject.Find("StartScript").gameObject.GetComponent<StartButton>().door1;
+        doorP2 = GameObject.Find("StartScript").gameObject.GetComponent<StartButton>().door2;
+        doorP3 = GameObject.Find("StartScript").gameObject.GetComponent<StartButton>().door3;
+
+        doorP1.SetActive(false);
+        doorP2.SetActive(false);
+        doorP3.SetActive(true);
+    }
+
+    public void EscapeText()
+    {
+        photonView.RPC("EscapeTextRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void EscapeTextRPC()
+    {
+        GameObject.Find("Canvas").transform.Find("EscapeText").gameObject.SetActive(true);
+    }
+
+    public void FugitiveWin()
+    {
+        photonView.RPC("FugitiveWinRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void FugitiveWinRPC()
+    {
+        SceneManager.LoadScene("FugitiveWin");
+    }
+
+    public void ChaserWin()
+    {
+        photonView.RPC("ChaserWinRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void ChaserWinRPC()
+    {
+        SceneManager.LoadScene("ChaserWin");
+    }
+
+    public void StartSet()
+    {
+        photonView.RPC("StartSetRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void StartSetRPC()
+    {
+        GameObject.Find("StartScript").GetComponent<StartButton>().SetFugitive(); //도망자 숫자
+        GameObject.Find("StartScript").GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public void FugitiveCount()
+    {
+        photonView.RPC("FugitiveCountRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void FugitiveCountRPC()
+    {
+        GameObject.Find("StartScript").GetComponent<StartButton>().fugitive--;
+        Debug.Log("도망자 카운트");
+        if (GameObject.Find("StartScript").GetComponent<StartButton>().fugitive <= 0)
+        {
+            GameObject.Find("StartScript").GetComponent<StartButton>().ChaserClear();
+        }
+    }
 }

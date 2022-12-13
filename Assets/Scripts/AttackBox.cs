@@ -26,10 +26,10 @@ public class AttackBox : MonoBehaviourPun
 
     private void Action()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) //상호작용 키
+        if (Input.GetMouseButtonDown(0)) //상호작용 키
         {
             player.GetComponent<PlayerMovement>().AttackAni();
-            Debug.Log("스페이스바");
+
             if (isOther == true)
             {
                 isAttack = true;
@@ -61,8 +61,9 @@ public class AttackBox : MonoBehaviourPun
                     return;
                 }
 
-                Debug.Log("!");
+                Debug.Log("공격받음");
                 other.GetComponent<PlayerMovement>().Damage();
+
                 //photonView.RPC("AttackRPC", RpcTarget.All, other);
             }
             else if (other.gameObject.tag == "AI")
