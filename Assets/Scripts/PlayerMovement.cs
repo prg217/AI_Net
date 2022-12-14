@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     public float speed = 5f;
     public bool isWalk;
-    private float jumpPower = 5f;
+    public bool isRun = false;
+    private float jumpPower = 3.5f;
     private bool isJump = false;
 
     public bool toggleCameraRotation;
@@ -86,11 +87,13 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 speed = 8f;
+                isRun = true;
                 animator.SetBool("isRun", true);
             }
             else
             {
                 speed = 5f;
+                isRun = false;
                 animator.SetBool("isRun", false);
             }
             InputMovement();
@@ -105,15 +108,22 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         }
         else if (!pv.IsMine)
         {
-            if (tr.position != currPos)
+            if (tr.position != currPos && isRun == false)
             {
-                animator.SetFloat("Speed", 1.0f);
+
+                animator.SetBool("isWalk", true);
                 tr.position = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
+                //position이 반영이 안됨
+            }
+            else if (tr.position != currPos && isRun == true)
+            {
+                animator.SetBool("isRun", true);
                 //position이 반영이 안됨
             }
             else
             {
-                animator.SetFloat("Speed", 0.0f);
+                animator.SetBool("isRun", false);
+                animator.SetBool("isWalk", false);
             }
 
             if (tr.rotation != currRot)
@@ -146,6 +156,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         {
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             isJump = true;
+            animator.SetBool("isJump", true);
 
             if (gameObject.GetComponent<Mission>().jumpMission == true)
             {
@@ -168,12 +179,14 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         {
             stream.SendNext(tr.position);
             stream.SendNext(tr.rotation);
+            //stream.SendNext(animator);
             stream.SendNext(name);
         }
         else
         {
             currPos = (Vector3)stream.ReceiveNext();
             currRot = (Quaternion)stream.ReceiveNext();
+            //animator = (Animator)stream.ReceiveNext();
             SetPlayerName((string)stream.ReceiveNext());
 
         }
@@ -313,6 +326,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         if (collision.gameObject.tag == "Floor")
         {
             isJump = false;
+            animator.SetBool("isJump", false);
         }
     }
 

@@ -7,6 +7,6 @@ public class Clear : MonoBehaviour
 {
     public void Lobby()
     {
-        SceneManager.LoadScene("LobbyScene");
+        SceneManager.LoadScene("LobbyScene2");
     }
 }

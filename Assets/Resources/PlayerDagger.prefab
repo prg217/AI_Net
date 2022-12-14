@@ -1475,6 +1475,7 @@ MonoBehaviour:
   isChaser: 0
   speed: 5
   isWalk: 0
+  isRun: 0
   toggleCameraRotation: 0
   smoothness: 10
   playerName: {fileID: 0}
@@ -1504,6 +1505,7 @@ MonoBehaviour:
   observableSearch: 0
   ObservedComponents:
   - {fileID: 565667705}
+  - {fileID: 3963742150525860420}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1569,10 +1571,10 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: isJump
   - Type: 9
-    SynchronizeType: 2
+    SynchronizeType: 0
     Name: Attack
   - Type: 4
     SynchronizeType: 2
