@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
-    private Animator animator;
+    public Animator animator;
 
     private int randomState = 0;
     private int randomMove = 0;
@@ -32,8 +32,6 @@ public class AI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = this.GetComponent<Animator>();
-
         StartCoroutine(AIState());
     }
 
@@ -48,14 +46,17 @@ public class AI : MonoBehaviour
         switch (state)
         {
             case State.Move:
+                animator.SetBool("isWalk", true);
                 AIMove();
                 break;
 
             case State.Rotation:
+                animator.SetBool("isWalk", false);
                 this.transform.Rotate(Vector3.up * randomRL * turnSpeed * Time.deltaTime);
                 break;
 
             case State.Waiting:
+                animator.SetBool("isWalk", false);
                 break;
 
             default:

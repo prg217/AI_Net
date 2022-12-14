@@ -13,13 +13,12 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
     public bool isChaser = false; //추격자 여부
 
-    Animator animator;
+    public Animator animator;
     //CharacterController characterController;
     private Transform tr;
     private Rigidbody rigid;
 
     public float speed = 5f;
-    public bool isWalk;
     public bool isRun = false;
     private float jumpPower = 3.5f;
     private bool isJump = false;
@@ -45,6 +44,9 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public GameObject doorP2;
     public GameObject doorP3;
 
+    private Vector3 posV;
+    private bool isWalk = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +58,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         pv = GetComponent<PhotonView>();
         pv.ObservedComponents[0] = this;
 
-        animator = this.GetComponent<Animator>();
+        //animator = this.GetComponent<Animator>();
         if (pv.IsMine)
         {
             GameObject.Find("Camera").GetComponent<CameraMovement>().objectTofollow = tr.Find("FollowCam").gameObject.transform;
@@ -84,18 +86,9 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             {
                 toggleCameraRotation = false; // �ѷ����� ��Ȱ��ȭ
             }
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                speed = 8f;
-                isRun = true;
-                animator.SetBool("isRun", true);
-            }
-            else
-            {
-                speed = 5f;
-                isRun = false;
-                animator.SetBool("isRun", false);
-            }
+
+            photonView.RPC("RunRPC", RpcTarget.All);
+
             InputMovement();
 
             if (missionClearCount >= 5 && isClear == false)
@@ -108,23 +101,32 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         }
         else if (!pv.IsMine)
         {
-            if (tr.position != currPos && isRun == false)
+            if (tr.position != currPos && isRun == false && isWalk == true)
             {
+                /*
+                posV = currPos + new Vector3(1, 1, 1);
+                if ((tr.position.x <= posV.x && tr.position.y <= posV.y && tr.position.z <= posV.z) || (tr.position.x >= posV.x && tr.position.y >= posV.y && tr.position.z >= posV.z))
+                {
 
+                }
+                else
+                {
+                    animator.SetBool("isWalk", true);
+                }*/
                 animator.SetBool("isWalk", true);
                 tr.position = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
-                //position이 반영이 안됨
             }
             else if (tr.position != currPos && isRun == true)
             {
                 animator.SetBool("isRun", true);
-                //position이 반영이 안됨
+                tr.position = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
             }
             else
             {
                 animator.SetBool("isRun", false);
                 animator.SetBool("isWalk", false);
             }
+
 
             if (tr.rotation != currRot)
             {
@@ -134,6 +136,35 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     }
 
+    [PunRPC]
+    void RunRPC()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = 8f;
+            isRun = true;
+            animator.SetBool("isRun", true);
+        }
+        else
+        {
+            speed = 5f;
+            isRun = false;
+            animator.SetBool("isRun", false);
+        }
+    }
+
+    [PunRPC]
+    void WalkRPC()
+    {
+        isWalk = true;
+    }
+
+    [PunRPC]
+    void WalkRPC2()
+    {
+        isWalk = false;
+    }
+
     void InputMovement()
     {
         h = Input.GetAxis("Horizontal");
@@ -141,11 +172,15 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
         {
+            photonView.RPC("WalkRPC", RpcTarget.All);
+
             tr.Translate(moveDir.normalized * Time.deltaTime * speed);
             animator.SetBool("isWalk", true);
         }
         else
         {
+            photonView.RPC("WalkRPC2", RpcTarget.All);
+
             animator.SetBool("isWalk", false);
         }
 

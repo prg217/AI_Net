@@ -1473,8 +1473,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isChaser: 0
+  animator: {fileID: 5637479865021757965}
   speed: 5
-  isWalk: 0
   isRun: 0
   toggleCameraRotation: 0
   smoothness: 10
@@ -1574,13 +1574,13 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: isJump
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Attack
   - Type: 4
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: isRun
   - Type: 4
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: isWalk
   m_SynchronizeLayers:
   - SynchronizeType: 0
