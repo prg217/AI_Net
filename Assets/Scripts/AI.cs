@@ -111,7 +111,6 @@ public class AI : MonoBehaviour
 
             yield return new WaitForSeconds(3.0f); //3초마다 판단하게
         }
-
     }
 
     private void AIMove()

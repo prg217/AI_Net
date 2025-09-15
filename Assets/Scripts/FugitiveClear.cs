@@ -10,7 +10,7 @@ public class FugitiveClear : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (other.gameObject.GetComponent<PlayerMovement>().isChaser == false)
+            if (other.gameObject.GetComponent<PlayerScript>().isChaser == false)
             {
                 //µµ¸ÁÀÚ ½Â¸®
                 start.GetComponent<StartButton>().FugitiveWin();

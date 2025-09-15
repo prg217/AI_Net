@@ -55,9 +55,9 @@ public class StartButton : MonoBehaviourPun
             {
                 random = Random.Range(0, playerList.Count + 1);
 
-                if (playerList[random].GetComponent<PlayerMovement>().isChaser == false)
+                if (playerList[random].GetComponent<PlayerScript>().isChaser == false)
                 {
-                    playerList[random].GetComponent<PlayerMovement>().SetChaser();
+                    playerList[random].GetComponent<PlayerScript>().SetChaser();
                 }
                 else
                 {
@@ -71,9 +71,9 @@ public class StartButton : MonoBehaviourPun
             
             for (int i = 0; i < playerList.Count; i++)
             {
-                playerList[i].GetComponent<PlayerMovement>().SetPlayerPosition();
-                playerList[i].GetComponent<PlayerMovement>().UIOpen();
-                playerList[i].GetComponent<PlayerMovement>().StartSet();
+                playerList[i].GetComponent<PlayerScript>().SetPlayerPosition();
+                playerList[i].GetComponent<PlayerScript>().UIOpen();
+                playerList[i].GetComponent<PlayerScript>().StartSet();
             }
             //이 이후 스타트 버튼을 삭제하고 플레이어들 맵 범위 안에 랜덤 스폰되게 하고
             
@@ -100,7 +100,7 @@ public class StartButton : MonoBehaviourPun
     {
         for (int i = 0; i < playerList.Count; i++)
         {
-            playerList[i].GetComponent<PlayerMovement>().FugitiveWin();
+            playerList[i].GetComponent<PlayerScript>().FugitiveWin();
         }          
     }
 
@@ -108,7 +108,7 @@ public class StartButton : MonoBehaviourPun
     {
         for (int i = 0; i < playerList.Count; i++)
         {
-            playerList[i].GetComponent<PlayerMovement>().ChaserWin(); //근데 플레이어가 이미 죽어서 삭제되어서 발동 안 할 가능성이
+            playerList[i].GetComponent<PlayerScript>().ChaserWin(); //근데 플레이어가 이미 죽어서 삭제되어서 발동 안 할 가능성이
         }
     }
 
@@ -116,8 +116,8 @@ public class StartButton : MonoBehaviourPun
     {
         for (int i = 0; i < playerList.Count; i++)
         {
-            playerList[i].GetComponent<PlayerMovement>().EscapeText();
-            //playerList[i].GetComponent<PlayerMovement>().Escape();
+            playerList[i].GetComponent<PlayerScript>().EscapeText();
+            //playerList[i].GetComponent<PlayerScript>().Escape();
         }
     }
 

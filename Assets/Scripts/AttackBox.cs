@@ -18,7 +18,7 @@ public class AttackBox : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<PlayerMovement>().pv.IsMine)
+        if (player.GetComponent<PlayerScript>().pv.IsMine)
         {
             Action();
         }
@@ -28,7 +28,7 @@ public class AttackBox : MonoBehaviourPun
     {
         if (Input.GetMouseButtonDown(0)) //상호작용 키
         {
-            player.GetComponent<PlayerMovement>().AttackAni();
+            player.GetComponent<PlayerScript>().AttackAni();
 
             if (isOther == true)
             {
@@ -62,14 +62,14 @@ public class AttackBox : MonoBehaviourPun
                 }
 
                 Debug.Log("공격받음");
-                other.GetComponent<PlayerMovement>().Damage();
+                other.GetComponent<PlayerScript>().Damage();
 
                 //photonView.RPC("AttackRPC", RpcTarget.All, other);
             }
             else if (other.gameObject.tag == "AI")
             {
                 Debug.Log("AI");
-                player.GetComponent<PlayerMovement>().AIDamage();
+                player.GetComponent<PlayerScript>().AIDamage();
                 Destroy(other.gameObject);
             }
             isAttack = false;

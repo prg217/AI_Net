@@ -146,7 +146,7 @@ public class Mission : MonoBehaviourPun
     {
         if (runTime >= 20f)
         {
-            gameObject.GetComponent<PlayerMovement>().MissionCountUp();//플레이어 미션 클리어 카운트 늘리기
+            gameObject.GetComponent<PlayerScript>().MissionCountUp();//플레이어 미션 클리어 카운트 늘리기
 
             runMission = false;
             ui[0].SetActive(false);
@@ -190,7 +190,7 @@ public class Mission : MonoBehaviourPun
     public void TargetMissionClear()
     {
         //targetMission = false;
-        gameObject.GetComponent<PlayerMovement>().MissionCountUp();
+        gameObject.GetComponent<PlayerScript>().MissionCountUp();
         ui[1].SetActive(false);
     }
 
@@ -200,7 +200,7 @@ public class Mission : MonoBehaviourPun
         if (stopTime >= 30)
         {
             stopMission = false;
-            gameObject.GetComponent<PlayerMovement>().MissionCountUp();//플레이어 미션 클리어 카운트 늘리기
+            gameObject.GetComponent<PlayerScript>().MissionCountUp();//플레이어 미션 클리어 카운트 늘리기
             ui[2].SetActive(false);
         }
         else
@@ -230,7 +230,7 @@ public class Mission : MonoBehaviourPun
         if (jumpCount >= 30)
         {
             jumpMission = false;
-            gameObject.GetComponent<PlayerMovement>().MissionCountUp();
+            gameObject.GetComponent<PlayerScript>().MissionCountUp();
             ui[3].SetActive(false);
             //점프 UI삭제
         }
@@ -255,7 +255,7 @@ public class Mission : MonoBehaviourPun
 
         if (repairCount >= 4)
         {
-            gameObject.GetComponent<PlayerMovement>().MissionCountUp();
+            gameObject.GetComponent<PlayerScript>().MissionCountUp();
 
             for (int i = 0; i < repair.Count; i++)
             {
@@ -276,7 +276,7 @@ public class Mission : MonoBehaviourPun
     public void DeliveryClear()
     {
         //UI지우고
-        gameObject.GetComponent<PlayerMovement>().MissionCountUp();
+        gameObject.GetComponent<PlayerScript>().MissionCountUp();
         ui[5].SetActive(false);
     }
 
