@@ -50,7 +50,7 @@ public class PlayerScript : MonoBehaviourPun, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-        int hp = 100;
+        hp = 100;
 
         tr = GetComponent<Transform>();
         rigid = GetComponent<Rigidbody>();
@@ -58,18 +58,16 @@ public class PlayerScript : MonoBehaviourPun, IPunObservable
         pv = GetComponent<PhotonView>();
         pv.ObservedComponents[0] = this;
 
-        //animator = this.GetComponent<Animator>();
         if (pv.IsMine)
         {
             GameObject.Find("Camera").GetComponent<CameraMovement>().objectTofollow = tr.Find("FollowCam").gameObject.transform;
             GameObject.Find("Camera").GetComponent<CameraMovement>().playerTr = gameObject.transform;
         }
-        //characterController = this.GetComponent<CharacterController>();
 
-        if (PhotonNetwork.IsMasterClient) //호스트 일 경우
+        if (PhotonNetwork.IsMasterClient) //호스트일 경우
         {
-            GameObject.Find("Canvas").transform.Find("StartButton").gameObject.SetActive(true);
             //게임 스타트 버튼이 보이게 한다.
+            GameObject.Find("Canvas").transform.Find("StartButton").gameObject.SetActive(true);
         }
     }
 

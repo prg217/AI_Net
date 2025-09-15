@@ -108,8 +108,8 @@ public class AI : MonoBehaviour
                 default:
                     break;
             }
-
-            yield return new WaitForSeconds(3.0f); //3초마다 판단하게
+            Debug.Log("상태 변경");
+            yield return new WaitForSeconds(3.0f); //3초마다 판단
         }
     }
 
